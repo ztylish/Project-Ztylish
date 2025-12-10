@@ -8,102 +8,99 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root{
-            --green:#03AC0E;        /* Hijau Tokopedia */
-            --green-dark:#008A0E;
+            --green:#03AC0E;
+            --green-dark:#008A00;
             --gray-light:#f5f5f5;
-            --gray:#666;
             --card:#ffffff;
             --text:#2d2d2d;
         }
         *{margin:0;padding:0;box-sizing:border-box;}
-        body{font-family:'Poppins',sans-serif;background:#fafafa;color:var(--text);overflow-x:hidden;min-height:100vh;}
+        body{font-family:'Poppins',sans-serif;background:#fafafa;color:var(--text);min-height:100vh;}
         .cursor{position:fixed;width:20px;height:20px;background:var(--green);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference;transform:translate(-50%,-50%);}
-        
+
         header{background:linear-gradient(135deg,var(--green),var(--green-dark));padding:4rem 1rem;text-align:center;color:white;position:relative;overflow:hidden;}
         header::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:repeating-conic-gradient(from 45deg,transparent,rgba(255,255,255,.15) 25%);animation:rotate 20s linear infinite;}
         @keyframes rotate{to{transform:rotate(360deg);}}
-        
+
         .typing{font-size:3.8rem;font-weight:800;color:white;overflow:hidden;border-right:4px solid #fff;white-space:nowrap;animation:typing 4s steps(30) infinite;}
         @keyframes typing{0%{width:0}50%{width:100%}100%{width:0}}
-        
-        nav{background:white;padding:1rem;box-shadow:0 2px 10px rgba(0,0,0,.1);position:sticky;top:0;z-index:100;}
+
+        nav{background:white;padding:1rem;box-shadow:0 2px 10px rgba(0,0,0,.1);position:sticky;top:0;z-index:100;text-align:center;}
         nav a{color:var(--text);margin:0 1.5rem;font-weight:600;text-transform:uppercase;transition:.3s;}
         nav a:hover{color:var(--green);}
-        
-        .cart-icon{position:fixed;top:20px;right:20px;background:var(--green);width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:white;box-shadow:0 0 30px rgba(3,172,14,.5);z-index:998;cursor:pointer;}
+
+        .cart-icon{position:fixed;top:20px;right:20px;background:var(--green);color:white;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;box-shadow:0 0 30px rgba(3,172,14,.5);z-index:998;cursor:pointer;}
         .cart-icon:hover{transform:scale(1.2);}
-        .cart-count{position:absolute;top:-8px;right:-8px;background:#ff3b30;color:white;width:28px;height:28px;border-radius:50%;font-size:.9rem;font-weight:800;display:flex;align-items:center;justify-content:center;}
-        
+        .cart-count{position:absolute;top:-8px;right:-8px;background:red;color:white;width:28px;height:28px;border-radius:50%;font-size:.9rem;font-weight:800;display:flex;align-items:center;justify-content:center;}
+
         .cart-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:999;align-items:center;justify-content:center;}
         .cart-content{background:white;max-width:500px;width:90%;border-radius:20px;padding:2rem;position:relative;max-height:90vh;overflow-y:auto;}
         .close-cart{position:absolute;top:15px;right:20px;font-size:2rem;cursor:pointer;color:#999;}
-        
+
         .container{max-width:1200px;margin:4rem auto;padding:0 1rem;}
-        
-        .filter-buttons button{padding:1rem 2rem;margin:.5rem;background:white;color:var(--text);border:2px solid var(--green);border-radius:50px;font-weight:700;cursor:pointer;transition:.4s;}
-        .filter-buttons button:hover,.filter-buttons button.active{background:var(--green);color:white;box-shadow:0 0 20px rgba(3,172,14,.4);}
-        
-        .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;}
-        .product{background:var(--card);border-radius:20px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,.1);transition:.5s;opacity:0;transform:translateY(30px);animation:popUp .8s forwards;}
-        .product:hover{transform:translateY(-15px);box-shadow:0 20px 40px rgba(3,172,14,.2);}
-        .product img{height:220px;width:100%;object-fit:cover;}
+        h2{text-align:center;margin:3rem 0;font-size:2.8rem;color:var(--green);}
+
+        .filter-buttons button{padding:.8rem 2rem;margin:.4rem;background:white;border:2px solid var(--green);color:var(--text);border-radius:50px;font-weight:700;cursor:pointer;transition:.3s;}
+        .filter-buttons button:hover,.filter-buttons button.active{background:var(--green);color:white;}
+
+        .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:2rem;}
+        .product{background:white;border-radius:20px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,.1);transition:.4s;opacity:0;transform:translateY(30px);animation:popUp .8s forwards;}
+        .product:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(3,172,14,.2);}
+        .product img{width:100%;height:220px;object-fit:cover;}
         .price-container{padding:1rem;text-align:center;}
-        .original-price{text-decoration:line-through;color:#999;font-size:0.95rem;}
-        .discounted-price{font-size:1.8rem;font-weight:900;color:var(--green);}
-        .add-to-cart{background:var(--green);color:white;padding:1rem;border:none;border-radius:50px;width:90%;margin:1rem auto 0;display:block;font-weight:700;cursor:pointer;}
-        
-        /* === SECTION REKOMENDASI OUTFIT === */
-        .outfit-section{margin:5rem 0;background:white;padding:3rem 0;border-radius:20px;box-shadow:0 5px 30px rgba(0,0,0,.08);}
-        .outfit-section h2{text-align:center;font-size:2.8rem;margin-bottom:3rem;color:var(--green);}
-        .outfit-slider{overflow:hidden;position:relative;max-width:1000px;margin:0 auto;}
+        .original-price{text-decoration:line-through;color:#999;}
+        .discounted-price{font-size:1.7rem;font-weight:900;color:var(--green);}
+        .add-to-cart{background:var(--green);color:white;padding:1rem;border:none;border-radius:50px;width:90%;margin:1rem auto;display:block;font-weight:700;cursor:pointer;}
+
+        /* Rekomendasi Outfit */
+        .outfit-section{background:white;padding:4rem 2rem;margin:5rem 0;border-radius:20px;box-shadow:0 5px 30px rgba(0,0,0,.08);}
+        .outfit-slider{position:relative;max-width:1000px;margin:0 auto;overflow:hidden;}
         .outfit-track{display:flex;gap:2rem;transition:transform .6s ease;}
-        .outfit-card{background:var(--gray-light);border-radius:20px;overflow:hidden;text-align:center;padding:1.5rem;box-shadow:0 5px 20px rgba(0,0,0,.1);}
-        .outfit-card img{width:100%;height:320px;object-fit:cover;}
-        .outfit-card h4{margin:1rem 0 .5rem;font-size:1.4rem;}
-        .outfit-card .items{color:var(--gray);font-size:0.95rem;margin-bottom:1rem;}
-        .outfit-card .price-total{font-size:1.5rem;font-weight:900;color:var(--green);}
-        
-        .slider-btn{position:absolute;top:50%;transform:translateY(-50%);background:var(--green);color:white;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;cursor:pointer;z-index:10;opacity:0.8;}
-        .slider-btn:hover{opacity:1;}
-        .prev-btn{left:-70px;}
-        .next-btn{right:-70px;}
-        
+        .outfit-card{min-width:320px;background:var(--gray-light);border-radius:20px;overflow:hidden;text-align:center;box-shadow:0 5px 20px rgba(0,0,0,.1);}
+        .outfit-card img{width:100%;height:340px;object-fit:cover;}
+        .outfit-card h4{font-size:1.5rem;margin:1rem 0 .5rem;}
+        .outfit-card .items{color:#666;font-size:.95rem;margin-bottom:1rem;}
+        .outfit-card .price-total{font-size:1.6rem;font-weight:900;color:var(--green);}
+
+        .slider-btn{position:absolute;top:50%;transform:translateY(-50%);background:var(--green);color:white;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;cursor:pointer;z-index:10;}
+        .prev-btn{left:10px;}
+        .next-btn{right:10px;}
+
         .wa-float{position:fixed;bottom:20px;right:20px;background:#25d366;color:white;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;box-shadow:0 0 30px rgba(37,211,102,.7);z-index:997;cursor:pointer;animation:pulse 2s infinite;}
         @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
-        
         footer{background:var(--green);color:white;padding:2rem;text-align:center;}
+        @keyframes popUp{to{opacity:1;transform:translateY(0)}}
     </style>
 </head>
 <body>
+
 <div class="cursor" id="cursor"></div>
 
-<!-- Cart Icon & Modal (sama seperti sebelumnya) -->
-<div class="cart-icon" id="cartIcon"><i class="fas fa-shopping-bag"></i><span class="cart-count" id="cartCount">0</span></div>
+<div class="cart-icon" id="cartIcon">Bag<span class="cart-count" id="cartCount">0</span></div>
 <div class="cart-modal" id="cartModal">
     <div class="cart-content">
         <span class="close-cart" id="closeCart">×</span>
-        <h2 style="text-align:center;color:var(--green);margin-bottom:1rem;">Keranjang Kamu</h2>
+        <h2 style="text-align:center;color:var(--green);">Keranjang Kamu</h2>
         <div id="cartItems"></div>
-        <div class="cart-total">Total: <span id="cartTotal">Rp 0</span></div>
-        <button class="checkout-btn" id="checkoutBtn"><i class="fab fa-whatsapp"></i> Checkout via WhatsApp</button>
+        <div style="text-align:center;margin:2rem 0;font-size:1.5rem;font-weight:800;color:var(--green);">Total: <span id="cartTotal">Rp 0</span></div>
+        <button style="background:#25d366;color:white;padding:1rem;border:none;border-radius:50px;width:100%;font-size:1.2rem;font-weight:700;cursor:pointer;">Checkout via WhatsApp</button>
     </div>
 </div>
 
 <header>
     <h1 class="typing">Ztylish Drop Harian</h1>
-    <p style="font-size:1.4rem;margin-top:1rem;">Fashion kekinian dengan harga terbaik • Retur gampang • Pengiriman cepat</p>
+    <p style="font-size:1.4rem;margin-top:1rem;">Fashion kekinian • Harga terbaik • Retur gampang</p>
 </header>
 
 <nav>
-    <a href="#home">Beranda</a>
     <a href="#products">Produk</a>
     <a href="#outfit">Rekomendasi Outfit</a>
     <a href="#return">Retur</a>
 </nav>
 
 <div class="container">
-    <h2 id="products" style="text-align:center;font-size:3rem;margin:3rem 0;color:var(--green);">Hot Item Hari Ini</h2>
-    <div class="filter-buttons">
+    <h2 id="products">Hot Item Hari Ini</h2>
+    <div class="filter-buttons" style="text-align:center;margin-bottom:2rem;">
         <button class="filter-btn active" data-category="all">Semua</button>
         <button class="filter-btn" data-category="Men">Pria</button>
         <button class="filter-btn" data-category="Women">Wanita</button>
@@ -114,69 +111,59 @@
     <!-- REKOMENDASI OUTFIT -->
     <div class="outfit-section" id="outfit">
         <h2>Rekomendasi Outfit Terkini</h2>
-        
-        <!-- Outfit Pria -->
+        <p style="text-align:center;margin-bottom:3rem;color:#666;">Pria</p>
         <div class="outfit-slider">
-            <button class="slider-btn prev-btn" onclick="slideOutfit('men', -1)">‹</button>
-            <button class="slider-btn next-btn" onclick="slideOutfit('men', 1)">›</button>
-            <div class="outfit-track" id="men-outfits">
-                <!-- JS akan isi -->
-            </div>
+            <button class="slider-btn prev-btn" onclick="slide('men',-1)">‹</button>
+            <button class="slider-btn next-btn" onclick="slide('men',1)">›</button>
+            <div class="outfit-track" id="men-track"></div>
         </div>
-        
-        <br><br><br>
-        <!-- Outfit Wanita -->
+
+        <p style="text-align:center;margin:4rem 0 2rem;color:#666;">Wanita</p>
         <div class="outfit-slider">
-            <button class="slider-btn prev-btn" onclick="slideOutfit('women', -1)">‹</button>
-            <button class="slider-btn next-btn" onclick="slideOutfit('women', 1)">›</button>
-            <div class="outfit-track" id="women-outfits">
-                <!-- JS akan isi -->
-            </div>
+            <button class="slider-btn prev-btn" onclick="slide('women',-1)">‹</button>
+            <button class="slider-btn next-btn" onclick="slide('women',1)">›</button>
+            <div class="outfit-track" id="women-track"></div>
         </div>
     </div>
 
-    <!-- Form Retur (sama) -->
-    <div class="return-section" id="return" style="background:white;padding:3rem;border-radius:20px;box-shadow:0 5px 30px rgba(0,0,0,.08);margin-top:5rem;">
+    <div style="background:white;padding:3rem;border-radius:20px;margin-top:5rem;box-shadow:0 5px 30px rgba(0,0,0,.08);" id="return">
         <h2 style="color:var(--green);">Form Retur Barang</h2>
-        <p style="text-align:center;margin-bottom:2rem;">Produk tidak cocok? Retur gampang banget!</p>
-        <form class="return-form" id="returnForm">
+        <form id="returnForm" style="display:grid;gap:1rem;max-width:600px;margin:2rem auto;">
             <input type="text" placeholder="Nama Lengkap" required>
             <input type="email" placeholder="Email" required>
             <input type="text" placeholder="ID Pesanan" required>
             <select required><option value="" disabled selected>Pilih Produk</option></select>
             <textarea rows="4" placeholder="Alasan retur" required></textarea>
-            <button type="submit" style="background:var(--green);">Kirim ke WhatsApp</button>
+            <button type="submit" style="background:var(--green);color:white;padding:1rem;border:none;border-radius:50px;font-weight:700;">Kirim ke WhatsApp</button>
         </form>
     </div>
 </div>
 
-<a href="https://wa.me/628123456789" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
-<footer><p>© 2025 Ztylish • Fashion Kekinian dengan Harga Terjangkau</p></footer>
+<a href="https://wa.me/628123456789"://wa.me/628123456789" class="wa-float">WhatsApp</a>
+<footer>© 2025 Ztylish • Fashion Kekinian dengan Harga Terjangkau</footer>
 
 <script>
     const WA_NUMBER = "628123456789"; // GANTI NOMOR ANDA
 
-    // Cursor tetap hijau Tokopedia
+    // Cursor
     document.addEventListener('mousemove', e => {
-        const cursor = document.getElementById('cursor');
-        cursor.style.left = `${e.clientX}px`;
-        cursor.style.top = `${e.clientY}px`;
+        document.getElementById('cursor').style.left = e.clientX + 'px';
+        document.getElementById('cursor').style.top = e.clientY + 'px';
     });
 
-    // Cart system (sama seperti sebelumnya, sudah diperbaiki)
+    // Cart
     let cart = [];
     const updateCart = () => {
-        document.getElementById('cartItems').innerHTML = '';
+        const items = document.getElementById('cartItems');
+        items.innerHTML = '';
         let total = 0;
-        cart.forEach((item, i) => {
+        cart.forEach((item,i) => {
             total += item.price;
-            document.getElementById('cartItems').innerHTML += `
-                <div class="cart-item" style="display:flex;align-items:center;gap:1rem;margin:1rem 0;padding:1rem;background:#f9f9f9;border-radius:15px;">
-                    <img src="${item.image}" style="width:60px;height:60px;object-fit:cover;border-radius:10px;">
-                    <div style="flex:1;"><h4>${item.name}</h4><p style="color:var(--green);font-weight:700;">
-                        ${item.price.toLocaleString('id-ID',{style:'currency',currency:'IDR'})}</p></div>
-                    <span style="color:#ff4444;cursor:pointer;font-size:1.4rem;" onclick="cart.splice(${i},1);updateCart();">×</span>
-                </div>`;
+            items.innerHTML += `<div style="display:flex;gap:1rem;padding:1rem;background:#f9f9f9;border-radius:15px;margin:10px 0;">
+                <img src="${item.image}" style="width:60px;height:60px;border-radius:10px;object-fit:cover;">
+                <div style="flex:1;"><strong>${item.name}</strong><br><span style="color:var(--green);">${item.price.toLocaleString('id-ID',{style:'currency',currency:'IDR'})}</span></div>
+                <span style="cursor:pointer;color:red;font-size:1.5rem;" onclick="cart.splice(${i},1);updateCart();">×</span>
+            </div>`;
         });
         document.getElementById('cartCount').textContent = cart.length;
         document.getElementById('cartTotal').textContent = total.toLocaleString('id-ID',{style:'currency',currency:'IDR'});
@@ -185,16 +172,16 @@
 
     document.getElementById('cartIcon').onclick = () => document.getElementById('cartModal').style.display = 'flex';
     document.getElementById('closeCart').onclick = () => document.getElementById('cartModal').style.display = 'none';
-    document.getElementById('checkoutBtn').onclick = () => {
+    document.getElementById('checkoutBtn') && (document.getElementById('checkoutBtn').onclick = () => {
         if(cart.length===0) return alert("Keranjang kosong!");
         let msg = "Halo Ztylish! Mau pesan:%0A%0A";
         let total = 0;
         cart.forEach(x=>{msg+=`• ${x.name} - ${x.price.toLocaleString('id-ID',{style:'currency',currency:'IDR'})}%0A`; total+=x.price;});
         msg += `%0A*Total: ${total.toLocaleString('id-ID',{style:'currency',currency:'IDR'})}*`;
         window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`,'_blank');
-    };
+    });
 
-    const products = [ /* produk tetap sama seperti kode Anda sebelumnya */ 
+    const products = [
         { name: "Kemeja Putih Polos", category: "Men", originalPrice: "Rp 195.000", discountedPrice: "Rp 170.000", price:170000, image: "https://cottonink.co.id/cdn/shop/files/AksaraPutih_20250804_01.jpg?v=1753240617" },
         { name: "Polo Black", category: "Men", originalPrice: "Rp 95.000", discountedPrice: "Rp 70.000", price:70000, image: "https://i.ebayimg.com/images/g/OyYAAeSwMHxoY1c8/s-l960.webp" },
         { name: "Kaos Polos", category: "Men", originalPrice: "Rp 75.000", discountedPrice: "Rp 50.000", price:50000, image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800" },
@@ -206,7 +193,6 @@
         { name: "Sepatu Lari", category: "Sport", originalPrice: "Rp 600.000", discountedPrice: "Rp 450.000", price:450000, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800" }
     ];
 
-    // Display produk
     const displayProducts = (cat='all') => {
         const list = document.getElementById('product-list');
         list.innerHTML = '';
@@ -214,51 +200,47 @@
         filtered.forEach((p,i) => {
             const div = document.createElement('div');
             div.className = 'product';
-            div.style.animationDelay = `${i*0.1}s`;
+            div.style.animationDelay = i*0.1+'s';
             div.innerHTML = `
                 <img src="${p.image}" alt="${p.name}">
-                <h3>${p.name}</h3>
+                <h3 style="padding:1rem;text-align:center;">${p.name}</h3>
                 <div class="price-container">
                     <div class="original-price">${p.originalPrice}</div>
                     <div class="discounted-price">${p.discountedPrice}</div>
                 </div>
-                <button class="add-to-cart" onclick="addToCart(${JSON.stringify(p).replace(/"/g,'&quot;')})">+ Keranjang</button>
-            `;
+                <button class="add-to-cart" onclick="addToCart(${JSON.stringify(p).replace(/"/g,'&quot;')})">+ Keranjang</button>`;
             list.appendChild(div);
         });
     };
 
-    // REKOMENDASI OUTFIT
+    // Outfit rekomendasi
     const outfits = {
         men: [
-            { title: "Casual Kerja", items: ["Kemeja Putih Polos", "Celana Jeans", "Sepatu Sneakers"], total: 170000+150000+300000, img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800" },
-            { title: "Street Style", items: ["Polo Black", "Celana Jeans", "Sepatu Lari"], total: 70000+150000+450000, img: "https://images.unsplash.com/photo-1516826957135-700dedea698e?w=800" }
+            {title:"Casual Kerja",items:["Kemeja Putih Polos","Celana Jeans","Sepatu Sneakers"],total:620000,img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800"},
+            {title:"Street Style",items:["Polo Black","Celana Jeans","Sepatu Lari"],total:670000,img:"https://images.unsplash.com/photo-1516826957135-700dedea698e?w=800"}
         ],
         women: [
-            { title: "Daily Hijab Look", items: ["Ukhti Muslimah Dress", "Women Blouse"], total: 450000+120000, img: "https://images.unsplash.com/photo-1585687495184-9b6d29a3e2ed?w=800" },
-            { title: "Office Chic", items: ["Women Blouse", "Women Skirt", "Sepatu Sneakers"], total: 120000+200000+300000, img: "https://images.unsplash.com/photo-1590338692112-9f3c21d5d5e8?w=800" }
+            {title:"Daily Hijab Look",items:["Ukhti Muslimah Dress","Women Blouse"],total:570000,img:"https://images.unsplash.com/photo-1585687495184-9b6d29a3e2ed?w=800"},
+            {title:"Office Chic",items:["Women Blouse","Women Skirt","Sepatu Sneakers"],total:620000,img:"https://images.unsplash.com/photo-1590338692112-9f3c21d5d5e8?w=800"}
         ]
     };
-
-    let currentSlide = {men:0, women:0};
-    const slideOutfit = (gender, direction) => {
+    let slideIndex = {men:0,women:0};
+    const slide = (gender,dir) => {
         const arr = outfits[gender];
-        currentSlide[gender] = (currentSlide[gender] + direction + arr.length) % arr.length;
-        document.getElementById(gender+'-outfits').style.transform = `translateX(-${currentSlide[gender]*105}%)`;
+        slideIndex[gender] = (slideIndex[gender] + dir + arr.length) % arr.length;
+        document.getElementById(gender+'-track').style.transform = `translateX(-${slideIndex[gender]*340}px)`;
     };
-
     const renderOutfits = () => {
-        ['men','women'].forEach(g => {
-            const container = document.getElementById(g+'-outfits');
-            container.innerHTML = '';
-            outfits[g].forEach(o => {
-                container.innerHTML += `
-                    <div class="outfit-card" style="min-width:300px;">
-                        <img src="${o.img}" alt="${o.title}">
-                        <h4>${o.title}</h4>
-                        <div class="items">${o.items.join(' • ')}</div>
-                        <div class="price-total">${o.total.toLocaleString('id-ID',{style:'currency',currency:'IDR'})}</div>
-                    </div>`;
+        ['men','women'].forEach(g=>{
+            const track = document.getElementById(g+'-track');
+            track.innerHTML = '';
+            outfits[g].forEach(o=>{
+                track.innerHTML += `<div class="outfit-card">
+                    <img src="${o.img}" alt="${o.title}">
+                    <h4>${o.title}</h4>
+                    <div class="items">${o.items.join(' • ')}</div>
+                    <div class="price-total">${o.total.toLocaleString('id-ID',{style:'currency',currency:'IDR'})}</div>
+                </div>`;
             });
         });
     };
@@ -269,8 +251,7 @@
         this.classList.add('active');
         displayProducts(this.dataset.category);
     }));
-
-    products.forEach(p => document.querySelector('#returnForm select').innerHTML += `<option>${p.name}</option>`);
+    products.forEach(p=>document.querySelector('#returnForm select').innerHTML += `<option>${p.name}</option>`);
     document.getElementById('returnForm').onsubmit = e => {
         e.preventDefault();
         const data = new FormData(e.target);
